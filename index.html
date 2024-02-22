@@ -1,67 +1,136 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mango AI</title>
     <link rel="icon" href="Designer Background Removed.png">
     <style>
         *{
-            background-color: lightgoldenrodyellow;
+            background-color: #caf0f8;
         }
+
+        #parent{
+            display: flex;
+            flex-direction: column;
+            padding: 10px;
+            margin: 10px;
+            border-radius: 10px;
+            border: 1px solid #00b4d8;
+            background-color: #90e0ef;
+        }
+
+        #name_logo{
+            color: #ca6702;
+            font-family: "Exo 2", sans-serif;
+            font-optical-sizing: auto;
+            font-weight: bold;
+            font-style: normal;
+        }
+        
+
         button{
             padding: 10px;
             margin: 10px;
             border-radius: 10px;
-            border: 1px solid #c86767;
-            background-color: #f0c39e;
+            border: 1px solid #00b4d8;
+            background-color: #90e0ef;
 ;
         }
         input{
             padding: 10px;
             margin: 10px;
             border-radius: 10px;
-            border: 1px solid #c86767;
-            background-color: #f0c39e;
+            border: 1px solid #00b4d8;
+            background-color: #90e0ef;
         }
         .footer {
-            position: fixed;
             left: 0;
             bottom: 10%;
             width: 100%;
-            background-color: #f8f9fa;
+            background-color: #90e0ef;
             color: black;
             text-align: center;
         }
-        p{
+        p {
             padding: 10px;
             margin: 10px;
             border-radius: 10px;
-            border: 1px solid #c86767;
-            background-color: #f0c39e;
-            align-items: flex-start;
+            border: 1px solid #00b4d8;
+            background-color: #90e0ef;
+        }
+        #questionaskcen{
+            border-radius: 10px;
+            border: 1px solid #00b4d8;
+            background-color: #90e0ef;
+            margin-left: 50%;
+        }
+        #responsecen{
+            border-radius: 10px;
+            border: 1px solid #00b4d8;
+            background-color: #90e0ef;
+            margin-right: 50%;
+        }
+        #notation{
+            position: relative;
+            border-radius: 10px;
+            width: 10%;
+            height: 20px;
+            margin: 0;
         }
     </style>
 </head>
 <body>
-    <h1><center>Mango AI Friend</center></h1>
-    <center><input type="text" id="name" placeholder="Name"><input type="number" id="age" placeholder="Age"><button id="save">Save</button></center>
-    <center>
-        <p id="resoponse">
+    <div id="parent">
+        <div>
+            <h1 id="name_logo">
+                <center>
+                    Mango AI Friend
+                </center>
+            </h1>
+        </div>  
+        <div>
+            <center>
+                <input type="text" id="name" placeholder="Name">
+                <input type="number" id="age" placeholder="Age">
+                <button id="save">Save</button>
+            </center>
+        </div>
+        <div id="container">
+            <center id="questionaskcen">
+                <h4 id="notation">You</h4>
+                <p id="questionask">
 
-        </p>
-    </center>
-    <div class="footer">
-        <center>
-            <input type="text" id="question" placeholder="Question" size="80px">
-            <button id="submit">Submit</button>
-        </center>
+                </p>
+            </center>
+
+            <center id="responsecen">
+                <h4 id="notation">Mango</h4>
+                <p id="response">
+
+                </p>
+            </center>
+        </div>
+        
+        <div class="footer">
+            <center>
+                <input type="text" id="question" placeholder="Question" size="80px">
+                <button id="submit">Submit</button>
+            </center>
+        </div>
     </div>
+
 
     <script>
         let name;
         var age;
         let save=document.querySelector("#save");
+        
         save.addEventListener("click", async ()=>{
             console.log("Save Button clicked");
             name=document.querySelector("#name").value;
@@ -70,17 +139,38 @@
             return name, age;
             });
 
+        let container = document.getElementById('container');
+        container.removeChild(container.firstChild);
+        container.removeChild(container.firstChild);
+        container.removeChild(container.firstChild);
+        container.removeChild(container.firstChild);
 
         let submit=document.querySelector("#submit");
         submit.addEventListener("click", async ()=>{
+
             console.log("Submit Button clicked");
             let ques=document.querySelector("#question").value;
+            let que=document.querySelector("#question").value="";
+            let q=document.querySelector("#questionask");
             let res=await mainFunc(name, age, ques);
-            let p=document.querySelector("#resoponse");
-            p.innerHTML=res.answer;
-            return res;
+            console.log("Responding......")
+            let p=document.querySelector("#response");
+            let answer=res.answer;
+            let newQuestion = document.createElement('center');
+            newQuestion.id = 'questionaskcen';
+            newQuestion.innerHTML = `
+                <h4 id="notation">You</h4>
+                <p id="questionask">${ques}</p>
+            `;
+            let newResponse = document.createElement('center');
+            newResponse.id = 'responsecen';
+            newResponse.innerHTML = `
+                <h4 id="notation">Mango</h4>
+                <p id="response">${answer}</p>
+            `;
+            document.getElementById('container').appendChild(newQuestion);
+            document.getElementById('container').appendChild(newResponse);
         })
-        
         const createTodo =async (name, age, question)=>{
         let options={
             method:"POST",
