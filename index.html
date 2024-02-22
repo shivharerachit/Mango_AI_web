@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mango AI</title>
+    <link rel="icon" href="Designer Background Removed.png">
+    <style>
+        *{
+            background-color: lightgoldenrodyellow;
+        }
+        button{
+            padding: 10px;
+            margin: 10px;
+            border-radius: 10px;
+            border: 1px solid #c86767;
+            background-color: #f0c39e;
+;
+        }
+        input{
+            padding: 10px;
+            margin: 10px;
+            border-radius: 10px;
+            border: 1px solid #c86767;
+            background-color: #f0c39e;
+        }
+        .footer {
+            position: fixed;
+            left: 0;
+            bottom: 10%;
+            width: 100%;
+            background-color: #f8f9fa;
+            color: black;
+            text-align: center;
+        }
+        p{
+            padding: 10px;
+            margin: 10px;
+            border-radius: 10px;
+            border: 1px solid #c86767;
+            background-color: #f0c39e;
+            align-items: flex-start;
+        }
+    </style>
+</head>
+<body>
+    <h1><center>Mango AI Friend</center></h1>
+    <center><input type="text" id="name" placeholder="Name"><input type="number" id="age" placeholder="Age"><button id="save">Save</button></center>
+    <center>
+        <p id="resoponse">
+
+        </p>
+    </center>
+    <div class="footer">
+        <center>
+            <input type="text" id="question" placeholder="Question" size="80px">
+            <button id="submit">Submit</button>
+        </center>
+    </div>
+
+    <script>
+        let name;
+        var age;
+        let save=document.querySelector("#save");
+        save.addEventListener("click", async ()=>{
+            console.log("Save Button clicked");
+            name=document.querySelector("#name").value;
+            age=Number(document.querySelector("#age").value);
+            console.log(name, age);
+            return name, age;
+            });
+
+
+        let submit=document.querySelector("#submit");
+        submit.addEventListener("click", async ()=>{
+            console.log("Submit Button clicked");
+            let ques=document.querySelector("#question").value;
+            let res=await mainFunc(name, age, ques);
+            let p=document.querySelector("#resoponse");
+            p.innerHTML=res.answer;
+            return res;
+        })
+        
+        const createTodo =async (name, age, question)=>{
+        let options={
+            method:"POST",
+            headers:{
+                "Content-type":"application/json"
+            },
+            body: JSON.stringify({
+                "user_id" : "abc",
+                "question" :  question,
+                "chat_history" : [],
+                "name" : name,
+                "age" : age 
+            })
+        }
+        console.log(options)
+        let p= await fetch('https://mangocloud-2b2gpae35q-uc.a.run.app/mango/talktome/friend',options)
+        let response=await p.json()
+        return response;
+    }
+
+    const mainFunc=async(name, age, question)=>{
+    let todo=await createTodo(name, age, question)
+    console.log(todo)
+        return todo;
+    }
+    </script>
+</body>
+</html>
