@@ -49,6 +49,15 @@
             border: 1px solid #00b4d8;
             background-color: #90e0ef;
         }
+
+        #gender{
+            padding: 10px;
+            margin: 10px;
+            border-radius: 10px;
+            border: 1px solid #00b4d8;
+            background-color: #90e0ef;
+        }
+
         .footer {
             left: 0;
             bottom: 10%;
@@ -98,6 +107,10 @@
             <center>
                 <input type="text" id="name" placeholder="Name">
                 <input type="number" id="age" placeholder="Age">
+                <select name="gender" id="gender" aria-placeholder="Gender">
+                    <option value="male">Male</option>
+                    <option value="female">Female</option>
+                </select>
                 <input type="text" id="option" placeholder="Option">
                 <button id="save">Save</button>
             </center>
@@ -130,15 +143,18 @@
     <script>
         let name;
         var age;
+        let gender;
+        let option;
         let save=document.querySelector("#save");
         
         save.addEventListener("click", async ()=>{
             console.log("Save Button clicked");
             name=document.querySelector("#name").value;
             age=Number(document.querySelector("#age").value);
+            gender = document.querySelector("#gender").value;
             option=document.querySelector("#option").value;
-            console.log(name, age, option);
-            return name, age, option;
+            console.log(name, age, option, gender);
+            return name, age, option, gender;
             });
 
         let container = document.getElementById('container');
@@ -154,7 +170,7 @@
             let ques=document.querySelector("#question").value;
             let que=document.querySelector("#question").value="";
             let q=document.querySelector("#questionask");
-            let res=await mainFunc(name, age, option, ques);
+            let res=await mainFunc(name, age, option, ques, gender);
             console.log("Responding......")
             let p=document.querySelector("#response");
             let answer=res.answer;
@@ -173,7 +189,7 @@
             document.getElementById('container').appendChild(newQuestion);
             document.getElementById('container').appendChild(newResponse);
         })
-        const createTodo =async (name, age, option, question)=>{
+        const createTodo =async (name, age, option, question, gender)=>{
         let options={
             method:"POST",
             headers:{
@@ -185,7 +201,8 @@
                 "question" :  question,
                 "chat_history" : [],
                 "name" : name,
-                "age" : age 
+                "age" : age,
+                "gender" : gender
             })
         }
         console.log(options)
@@ -194,8 +211,8 @@
         return response;
     }
 
-    const mainFunc=async(name, age, option, question)=>{
-    let todo=await createTodo(name, age, option, question)
+    const mainFunc=async(name, age, option, question, gender)=>{
+    let todo=await createTodo(name, age, option, question, gender)
     console.log(todo)
         return todo;
     }

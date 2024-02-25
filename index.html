@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+      <link rel="preconnect" href="https://fonts.googleapis.com">
+      <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+      <link href="https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+      <meta charset="UTF-8" />
+      <title>Mango's Login Page</title>
+      <link rel="icon" href="Designer Background Removed.png">
+      
+      <style>
+
+        *{
+              font-family: "Exo 2", sans-serif;
+              font-optical-sizing: auto;
+              font-weight: bold;
+              font-style: normal;
+        }
+
+        body {
+              background-color: #cdb4db;
+        }
+
+        .login-container {
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              height: 100vh;
+        }
+
+        form {
+              display: flex;
+              flex-direction: column;
+              align-items: center;
+        }
+
+        h1 {
+              margin-bottom: 20px;
+        }
+
+        input {
+              margin-bottom: 10px;
+              padding: 5px;
+              border: 1px solid #ccc;
+              border-radius: 5px;
+              width: 300px;
+        }
+
+        button {
+              padding: 5px 10px;
+              border: none;
+              border-radius: 5px;
+              background-color: #336699;
+              color: #fff;
+              cursor: pointer;
+        }
+        body {
+          font-family: sans-serif;
+        }
+
+        #login-form {
+          background-color: #bde0fe;
+          border-radius: 5%;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          margin-bottom: 10vh;
+          padding: 4%;
+        }
+
+        #login-form img {
+          width: 10vw;
+          margin-bottom: 0.01vh;
+        }
+
+        input {
+          margin-bottom: 10px;
+          padding: 5px;
+          background-color: #a2d2ff;
+          border: 1px solid #a2d2ff;
+          border-radius: 5px;
+        }
+
+        button {
+          padding: 5px 10px;
+          border: none;
+          border-radius: 5px;
+          background-color: #336699;
+          color: #fff;
+          cursor: pointer;
+        }
+      </style>
+</head>
+<body>
+
+
+
+
+
+
+
+
+
+
+
+  <div class="login-container">
+    <form id="login-form">
+      <img src="Designer Background Removed.png" alt="Mango_AI">
+      <h1>MANGO</h1>
+      <h3>Login Here</h3>
+      <input type="email" placeholder="Email" id="email" />
+      <input type="password" placeholder="Password" id="password" />
+      <button type="submit">Sign In</button>
+    </form>
+  </div>
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <script type="module">
+    
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+    import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-analytics.js";
+    import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
+
+    
+    const firebaseConfig = {
+      apiKey: "AIzaSyAIb56aW5tc14dx_VOfyRuVL6p8pNcfzLo",
+      authDomain: "mango-ai-web.firebaseapp.com",
+      projectId: "mango-ai-web",
+      storageBucket: "mango-ai-web.appspot.com",
+      messagingSenderId: "858225659859",
+      appId: "1:858225659859:web:ec1d0eb7310a05b7e66926",
+      measurementId: "G-VNKP9732SM"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const analytics = getAnalytics(app);
+
+
+
+    const form = document.getElementById("login-form");
+
+    form.addEventListener("submit", (e) => {
+      e.preventDefault();
+        
+      const email = document.getElementById("email").value;
+      const password = document.getElementById("password").value;
+      
+      const auth = getAuth();
+      signInWithEmailAndPassword(auth, email, password)
+        .then((userCredential) => {
+          // Signed in 
+          const user = userCredential.user;
+          alert("Login successful");
+          
+          window.location.href = "friend.html";
+        })
+        .catch((error) => {
+          const errorCode = error.code;
+          const errorMessage = error.message;
+          alert("Incorrect Email Id or Password");
+        });
+
+
+      
+      
+    });
+  </script>
+</body>
+</html>
