@@ -1,12 +1,58 @@
+
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mango's Login Page</title>
+    <title>Mango's Home Page</title>
     <link rel="icon" href="Designer Background Removed.png">
 </head>
+<style>
+    body {
+        font-family: sans-serif;
+    }
+    h1 {
+        text-align: center;
+    }
+    button {
+        padding: 5px 10px;
+        border: none;
+        border-radius: 5px;
+        background-color: #336699;
+        color: #fff;
+        cursor: pointer;
+    }
+    button:hover {
+        background-color: #2a4e6e;
+    }
+    button:active {
+        background-color: #1a3a4f;
+    }
+    button:focus {
+        outline: none;
+    }
+    button:disabled {
+        background-color: #c0c0c0;
+        color: #fff;
+        cursor: not-allowed;
+    }
+    button:disabled:hover {
+        background-color: #c0c0c0;
+    }
+    button:disabled:active {
+        background-color: #c0c0c0;
+    }
+    button:disabled:focus {
+        outline: none;
+    }
+</style>
 <body>
-    
+    <h1>Welcome to the  Home Page!</h1>
+    <button onclick="moveToChat('option')">Chat with Option</button>
+    <button onclick="moveToChat('friend')">Chat with Friend</button>
+    <script>
+        function moveToChat(user) {
+            //move to a new webpage named option.html or friend.html
+            window.location.href = `${user}.html`;
+        }
+    </script>
 </body>
 </html>
