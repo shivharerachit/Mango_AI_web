@@ -112,7 +112,6 @@
                     <option value="female">Female</option>
                 </select>
                 <input type="text" id="option" placeholder="Option">
-                <button id="save">Save</button>
             </center>
         </div>
         <div id="container">
@@ -146,16 +145,6 @@
         let gender;
         let option;
         let save=document.querySelector("#save");
-        
-        save.addEventListener("click", async ()=>{
-            console.log("Save Button clicked");
-            name=document.querySelector("#name").value;
-            age=Number(document.querySelector("#age").value);
-            gender = document.querySelector("#gender").value;
-            option=document.querySelector("#option").value;
-            console.log(name, age, option, gender);
-            return name, age, option, gender;
-            });
 
         let container = document.getElementById('container');
         container.removeChild(container.firstChild);
@@ -166,6 +155,15 @@
         let submit=document.querySelector("#submit");
         submit.addEventListener("click", async ()=>{
 
+
+            name=document.querySelector("#name").value;
+            age=Number(document.querySelector("#age").value);
+            gender = document.querySelector("#gender").value;
+            option=document.querySelector("#option").value;
+            console.log(name, age, option, gender);
+
+
+            
             console.log("Submit Button clicked");
             let ques=document.querySelector("#question").value;
             let que=document.querySelector("#question").value="";
