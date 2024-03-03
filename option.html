@@ -139,15 +139,14 @@
         </div>
     </div>
 
-
     <script>
         let name;
         var age;
         let gender;
         let option;
-        let chat_history = [];
         let save=document.querySelector("#save");
 
+        save.addEventListener("click", async ()=>{
         save.addEventListener("click", async ()=>{
             console.log("Save Button clicked");
             name=document.querySelector("#name").value;
@@ -171,7 +170,7 @@
             let ques=document.querySelector("#question").value;
             let que=document.querySelector("#question").value="";
             let q=document.querySelector("#questionask");
-            let res=await mainFunc(name, age, option, ques, gender, chat_history);
+            let res=await mainFunc(name, age, option, ques, gender);
             console.log("Responding......")
             let p=document.querySelector("#response");
             let answer=res.answer;
@@ -207,23 +206,6 @@
                 "gender" : gender
             })
         }
-
-        const updateTodo =async (name, age, option, question, gender)=>{
-            let options={
-                method:"POST",
-                headers:{
-                    "Content-type":"application/json"
-                },
-                body: JSON.stringfy({
-                    "option" : option,
-                    "user_id" : "abc",
-                    "question" : question,
-                    "chat_history" : chat_history,
-                    "name" : name,
-                    "age" : age,
-                    "gender" : gender
-                })
-        }
             
         console.log(options)
         let p= await fetch('https://mangocloud-2b2gpae35q-uc.a.run.app/mango/talktome/option',options)
@@ -231,12 +213,8 @@
         return response;
     }
 
-    const mainFunc=async(name, age, option, question, gender, chat_history)=>{
-    if(chat_history=[]){
-        let todo=await createTodo(name, age, option, question, gender)
-    }else{
-        let todo=await updateTodo(name, age, option, question, gender, chat_history)
-    }
+    const mainFunc=async(name, age, option, question, gender)=>{
+    let todo=await createTodo(name, age, option, question, gender)
     console.log(todo)
         return todo;
     }
