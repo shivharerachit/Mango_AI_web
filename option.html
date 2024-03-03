@@ -4,8 +4,6 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
-
-
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mango AI</title>
@@ -14,7 +12,6 @@
         *{
             background-color: #caf0f8;
         }
-
         #parent{
             display: flex;
             flex-direction: column;
@@ -24,7 +21,6 @@
             border: 1px solid #00b4d8;
             background-color: #90e0ef;
         }
-
         #name_logo{
             color: #ca6702;
             font-family: "Exo 2", sans-serif;
@@ -33,7 +29,6 @@
             font-style: normal;
         }
         
-
         button{
             padding: 10px;
             margin: 10px;
@@ -49,7 +44,6 @@
             border: 1px solid #00b4d8;
             background-color: #90e0ef;
         }
-
         #gender{
             padding: 10px;
             margin: 10px;
@@ -57,7 +51,6 @@
             border: 1px solid #00b4d8;
             background-color: #90e0ef;
         }
-
         .footer {
             left: 0;
             bottom: 10%;
@@ -119,14 +112,11 @@
             <center id="questionaskcen">
                 <h4 id="notation">You</h4>
                 <p id="questionask">
-
                 </p>
             </center>
-
             <center id="responsecen">
                 <h4 id="notation">Mango</h4>
                 <p id="response">
-
                 </p>
             </center>
         </div>
@@ -138,7 +128,6 @@
             </center>
         </div>
     </div>
-
     <script>
         let name;
         var age;
@@ -146,7 +135,6 @@
         let option;
         let save=document.querySelector("#save");
 
-        save.addEventListener("click", async ()=>{
         save.addEventListener("click", async ()=>{
             console.log("Save Button clicked");
             name=document.querySelector("#name").value;
@@ -156,13 +144,11 @@
             console.log(name, age, option, gender);
             return name, age, option, gender;
             });
-
         let container = document.getElementById('container');
         container.removeChild(container.firstChild);
         container.removeChild(container.firstChild);
         container.removeChild(container.firstChild);
         container.removeChild(container.firstChild);
-
         let submit=document.querySelector("#submit");
         submit.addEventListener("click", async ()=>{
             
@@ -174,39 +160,13 @@
             console.log("Responding......")
             let p=document.querySelector("#response");
             let answer=res.answer;
-            chat_history=res.chat_history;
             let newQuestion = document.createElement('center');
             newQuestion.id = 'questionaskcen';
             newQuestion.innerHTML = `
-                <h4 id="notation">You</h4>
-                <p id="questionask">${ques}</p>
-            `;
-            let newResponse = document.createElement('center');
-            newResponse.id = 'responsecen';
-            newResponse.innerHTML = `
-                <h4 id="notation">Mango</h4>
-                <p id="response">${answer}</p>
-            `;
-            document.getElementById('container').appendChild(newQuestion);
-            document.getElementById('container').appendChild(newResponse);
-        })
-        const createTodo =async (name, age, option, question, gender)=>{
-        let options={
-            method:"POST",
-            headers:{
-                "Content-type":"application/json"
-            },
-            body: JSON.stringify({
-                "option" : option,
-                "user_id" : "abc",
-                "question" :  question,
-                "chat_history" : [],
-                "name" : name,
-                "age" : age,
+	@@ -205,14 +207,36 @@ <h4 id="notation">Mango</h4>
                 "gender" : gender
             })
         }
-            
         console.log(options)
         let p= await fetch('https://mangocloud-2b2gpae35q-uc.a.run.app/mango/talktome/option',options)
         let response=await p.json()
@@ -218,6 +178,3 @@
     console.log(todo)
         return todo;
     }
-    </script>
-</body>
-</html>
